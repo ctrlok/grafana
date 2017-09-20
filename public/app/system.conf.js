@@ -32,7 +32,8 @@ System.config({
     "jquery.flot.fillbelow": "vendor/flot/jquery.flot.fillbelow",
     "jquery.flot.gauge": "vendor/flot/jquery.flot.gauge",
     "d3": "vendor/d3/d3.js",
-    "jquery.flot.dashes": "vendor/flot/jquery.flot.dashes"
+    "jquery.flot.dashes": "vendor/flot/jquery.flot.dashes",
+    "ace": "vendor/npm/ace-builds/src-noconflict/ace"
   },
 
   packages: {
@@ -73,5 +74,9 @@ System.config({
       format: 'global',
       exports: 'Mousetrap'
     },
+    'vendor/npm/ace-builds/src-noconflict/ace.js': {
+      format: 'global',
+      exports: 'ace'
+    }
   }
 });

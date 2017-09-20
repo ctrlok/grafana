@@ -29,14 +29,11 @@ export class PanelCtrl {
   fullscreen: boolean;
   inspector: any;
   editModeInitiated: boolean;
-  editorHelpIndex: number;
   editMode: any;
   height: any;
   containerHeight: any;
   events: Emitter;
   timing: any;
-  skippedLastRefresh: boolean;
-  isPanelVisible: any;
 
   constructor($scope, $injector) {
     this.$injector = $injector;
@@ -77,14 +74,7 @@ export class PanelCtrl {
   }
 
   refresh() {
-    if (!this.isPanelVisible() && !this.dashboard.meta.soloMode && !this.dashboard.snapshot) {
-      this.skippedLastRefresh = true;
-      return;
-    }
-
-    this.skippedLastRefresh = false;
-
-    this.events.emit('refresh', null);
+   this.events.emit('refresh', null);
   }
 
   publishAppEvent(evtName, evt) {
@@ -193,14 +183,6 @@ export class PanelCtrl {
     this.calculatePanelHeight();
     this.timing.renderStart = new Date().getTime();
     this.events.emit('render', payload);
-  }
-
-  toggleEditorHelp(index) {
-    if (this.editorHelpIndex === index) {
-      this.editorHelpIndex = null;
-      return;
-    }
-    this.editorHelpIndex = index;
   }
 
   duplicate() {

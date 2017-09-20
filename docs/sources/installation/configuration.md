@@ -15,6 +15,12 @@ weight = 1
 The Grafana back-end has a number of configuration options that can be
 specified in a `.ini` configuration file or specified using environment variables.
 
+## Comments In .ini Files
+
+Semicolons (the `;` char) are the standard way to comment out lines in a `.ini` file.
+
+A common problem is forgetting to uncomment a line in the `custom.ini` (or `grafana.ini`) file which causes the configuration option to be ignored.
+
 ## Config file locations
 
 - Default configuration from `$WORKING_DIR/conf/defaults.ini`
@@ -203,6 +209,12 @@ For MySQL, use either `true`, `false`, or `skip-verify`.
 
 (MySQL only) The common name field of the certificate used by the `mysql` server. Not necessary if `ssl_mode` is set to `skip-verify`.
 
+### max_idle_conn
+The maximum number of connections in the idle connection pool.
+
+### max_open_conn
+The maximum number of open connections to the database.
+
 <hr />
 
 ## [security]
@@ -240,13 +252,13 @@ Define a white list of allowed ips/domains to use in data sources. Format: `ip_o
 ### allow_sign_up
 
 Set to `false` to prohibit users from being able to sign up / create
-user accounts. Defaults to `true`.  The admin user can still create
+user accounts. Defaults to `false`.  The admin user can still create
 users from the [Grafana Admin Pages](../../reference/admin)
 
 ### allow_org_create
 
 Set to `false` to prohibit users from creating new organizations.
-Defaults to `true`.
+Defaults to `false`.
 
 ### auto_assign_org
 
@@ -444,19 +456,28 @@ false only pre-existing Grafana users will be able to login (if ldap authenticat
 <hr>
 
 ## [auth.proxy]
+
 This feature allows you to handle authentication in a http reverse proxy.
 
 ### enabled
+
 Defaults to `false`
 
 ### header_name
+
 Defaults to X-WEBAUTH-USER
 
 #### header_property
+
 Defaults to username but can also be set to email
 
 ### auto_sign_up
+
 Set to `true` to enable auto sign up of users who do not exist in Grafana DB. Defaults to `true`.
+
+### whitelist
+
+Limit where auth proxy requests come from by configuring a list of IP addresses. This can be used to prevent users spoofing the X-WEBAUTH-USER header.
 
 <hr>
 
